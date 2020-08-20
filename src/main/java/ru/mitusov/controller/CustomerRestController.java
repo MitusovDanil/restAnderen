@@ -6,9 +6,6 @@ import ru.mitusov.entity.Customer;
 import ru.mitusov.exception.CustomerNotFoundException;
 import ru.mitusov.service.CustomerService;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,7 +18,7 @@ public class CustomerRestController {
     @GetMapping("/customers")
     public List<Customer> getAllCustomers() {
 
-     return customerService.getAllCustomers();
+        return customerService.getAllCustomers();
 
     }
 
@@ -35,17 +32,21 @@ public class CustomerRestController {
         return customerService.findCustomerById(customerId);
     }
 
-   @PostMapping("/customers")
-   public Customer saveCustomer(@RequestBody Customer customer) {
+    @PostMapping("/customers")
+    public Customer saveCustomer(@RequestBody Customer customer) {
         customer.setId(0);
-       customerService.saveCustomer(customer);
-       return customer;
-   }
+        customerService.saveCustomer(customer);
+        return customer;
+    }
 
     @DeleteMapping("/customers/{customerId}")
     public void deleteCustomerById(@PathVariable int customerId) {
         customerService.deleteCustomer(customerId);
     }
 
-
+    @PutMapping("/customers")
+    public Customer updateCustomer(@RequestBody Customer customer) {
+        customerService.saveCustomer(customer);
+        return customer;
+    }
 }
